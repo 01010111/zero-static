@@ -24,7 +24,6 @@ function init() {
 	}
 
 	#if GH_PAGES
-	trace('hi');
 	if (!FileSystem.exists('.github/workflows/deploy.yml')) {
 		trace('initializing github action `.github/workflows/deploy.yml`');
 		FileSystem.createDirectory('.github/workflows');
