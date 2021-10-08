@@ -32,7 +32,7 @@ function get_command_data(s:String) {
 function get_component(component:String) {
 	if (!Data.components.exists(component)) {
 		trace('Component does not exist: $component');
-		return '';
+		return '<!-- missing component "$component" -->';
 	}
 	return Data.components[component];
 }
@@ -41,7 +41,7 @@ function get_component(component:String) {
 function get_markdown(component:String) {
 	if (!Data.markdown.exists(component)) {
 		trace('Markdown does not exist: $component');
-		return '';
+		return '<!-- missing text "$component" -->';
 	}
 	return Markdown.markdownToHtml(Data.markdown[component]);
 }
@@ -49,7 +49,7 @@ function get_markdown(component:String) {
 
 function unknown_command(component:String, command:String) {
 	trace('Unknown command "$command" on component: $component');
-	return '';
+	return '<!-- unknown command "$command $component" -->';
 }
 
 function apply_tabs(text:String, tabs:Int) {
