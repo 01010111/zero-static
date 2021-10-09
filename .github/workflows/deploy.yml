@@ -17,7 +17,7 @@ build-and-deploy:
 
   - name: Build 🔨
     run: |
-    haxe build.hxml
+    haxe -lib zero-static -lib markdown
 
   - name: Push changes 🏃‍♀️
     uses: ad-m/github-push-action@master
