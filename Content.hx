@@ -30,35 +30,35 @@ var deploy_yml = "name: Build and Deploy
 on: [push]
 jobs:
 build-and-deploy:
- runs-on: ubuntu-latest
- steps:
- - name: Checkout 👀
-  uses: actions/checkout@v2.3.1
+	runs-on: ubuntu-latest
+	steps:
+	- name: Checkout 👀
+		uses: actions/checkout@v2.3.1
+	
+	- name: Setup Haxe 🚧
+		uses: krdlab/setup-haxe@v1
 
- - name: Setup Haxe 🚧
-  uses: krdlab/setup-haxe@v1
+	- name: Setup libs 📚
+		run: |
+		haxelib git zero-static https://github.com/01010111/zero-static --always --quiet
+		haxelib install markdown --always --quiet
 
- - name: Setup libs 📚
-  run: |
-  haxelib git zero-static https://github.com/01010111/zero-static --always --quiet
-  haxelib install markdown --always --quiet
+	- name: Build 🔨
+		run: |
+		haxe -lib zero-static -lib markdown
 
- - name: Build 🔨
-  run: |
-  haxe -lib zero-static -lib markdown
-
- - name: Push changes 🏃‍♀️
-  uses: ad-m/github-push-action@master
-  with:
-  github_token: ${{ secrets.GITHUB_TOKEN }}
-  branch: ${{ github.ref }}
-  force: true
- 
- - name: Deploy to GitHub Pages 🚀
-  uses: Cecilapp/GitHub-Pages-deploy@v3
-  env:
-  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  with:
-  email: me@mysite.com
-  build_dir: dist
-  jekyll: no";
+	- name: Push changes 🏃‍♀️
+		uses: ad-m/github-push-action@master
+		with:
+		github_token: ${{ secrets.GITHUB_TOKEN }}
+		branch: ${{ github.ref }}
+		force: true
+	
+	- name: Deploy to GitHub Pages 🚀
+		uses: Cecilapp/GitHub-Pages-deploy@v3
+		env:
+		GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+		with:
+		email: me@mysite.com
+		build_dir: dist
+		jekyll: no";
