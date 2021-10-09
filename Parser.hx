@@ -56,9 +56,12 @@ function apply_tabs(text:String, tabs:Int) {
 	var lines = text.split('\n');
 	var tab_str = '';
 	for (i in 0...tabs) tab_str += '\t';
+	var do_add = true;
 	for (i in 0...lines.length) {
 		var line = lines[i];
-		lines[i] = tab_str + line;
+		if (line.contains('<code>') && !line.contains('</code>')) do_add = false;
+		if (do_add) lines[i] = tab_str + line;
+		if (line.contains('</code>') && !line.contains('<code>')) do_add = true;
 	}
 	return lines.join('\n');
 }
