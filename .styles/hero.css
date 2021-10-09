@@ -1,0 +1,91 @@
+.hero {
+	display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 920px;
+    background-image: linear-gradient(107.96deg, #008FCC 0%, #300A9B 75.53%, #870A9B 100.01%);
+	mask-image: url(images/hero-mask.png);
+	mask-size: 100% 100%;
+	-webkit-mask-image: url(images/hero-mask.png);
+	-webkit-mask-size: 100% 100%;
+	image-rendering: -webkit-optimize-contrast;
+	overflow: hidden;
+}
+
+.hero-text {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+    justify-content: center;
+	width: 375px;
+	height: 400px;
+	color: white;
+	text-align: center;
+}
+
+.hero-text * {
+	margin: 4px 0;
+	font-weight: bold;
+}
+
+.hero-text::before {
+	width: 375px;
+	height: 400px;
+	content: "";
+	background-image: url('images/logo-light-lines.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	opacity: 0.5;
+	overflow: hidden;
+}
+
+.hero-text::after {
+	height: 420px;
+	width: 530px;
+	content: "";
+	background-image: url('images/logo-light-lines.svg');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: absolute;
+	opacity: 0.1;
+	animation-name: hero-logo;
+	animation-duration: 3s;
+	animation-iteration-count: infinite;
+	overflow: hidden;
+}
+
+@keyframes hero-logo {
+	from {
+		height: 420px;
+		width: 530px;
+	}
+
+	50% {
+		height: 480px;
+		width: 420px;
+	}
+
+	to {
+		height: 420px;
+		width: 530px;
+	}
+}
+
+@media screen and (max-width: 800px) {
+
+	.hero {
+		height: 100vh;
+	}
+
+	.hero-text::before {
+		width: 187px;
+		height: 200px;
+	}
+
+	.hero-text::after {
+		display: none;
+	}
+}

@@ -1,0 +1,45 @@
+.accordion {
+	background-color: white;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	text-align: left;
+	border: none;
+	outline: none;
+	transition: 300ms;
+}
+  
+.accordion.active, .accordion:hover {
+	background-color: #fed;
+}
+  
+.panel {
+	max-height: 0;
+	overflow: hidden;
+	transition: 200ms;
+	margin: 0 32px;
+}
+
+.panel * {
+	margin: 16px 0;
+}
+
+.panel.active {
+	margin: 32px;
+}
+
+.accordion:after {
+	content: '\002B';
+	font-size: 32px;
+	float: left;
+	margin: 0 16px;
+}
+  
+.accordion.active:after {
+	content: "\002D";
+	margin: -2px 16px;
+}
+
+.panel h1, .panel h2, .panel h3 {
+	margin-top: 32px;
+}

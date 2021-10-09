@@ -1,0 +1,13 @@
+.tutorial {
+	max-width: calc(100vw - 64px);
+	width: 800px;
+	margin: 128px auto;
+}
+
+.tutorial section {
+	margin: 64px;
+}
+
+.tutorial section * {
+	margin: 32px 0;
+}

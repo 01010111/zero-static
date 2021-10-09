@@ -1,0 +1,3 @@
+-lib zero-static
+-lib markdown
+-D GH_PAGES

@@ -1,0 +1,29 @@
+<div class="tutorial">
+	<section>
+		%% md tutorial-intro.md
+	</section>
+	<h1 class="accordion">Setup</h1>
+	<article class="panel">
+		%% md tutorial-setup.md
+	</article>
+	<h1 class="accordion">Usage</h1>
+	<article class="panel">
+		%% md tutorial-usage.md
+	</article>
+</div>
+<script>
+	for (let accordian of document.getElementsByClassName('accordion')) {
+		accordian.onclick = () => {
+			accordian.classList.toggle('active');
+			let panel = accordian.nextElementSibling;
+			if (accordian.classList.contains('active')) {
+				panel.classList.add('active');
+				panel.style.maxHeight = panel.scrollHeight + 'px';
+			}
+			else {
+				panel.classList.remove('active');
+				panel.style.maxHeight = null;
+			}
+		}
+	}
+</script>

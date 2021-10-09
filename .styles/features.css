@@ -1,0 +1,14 @@
+.features {
+	width: 800px;
+	max-width: calc(100vw - 32px);
+	margin: 128px auto;
+}
+
+.features section {
+	margin: 128px 16px;
+}
+
+.features section h1 {
+	text-align: center;
+	margin-bottom: 32px;
+}

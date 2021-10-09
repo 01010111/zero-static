@@ -1,0 +1,1 @@
+Want to learn more? Use our getting started page to start making a static website in less than five minutes

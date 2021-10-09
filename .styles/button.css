@@ -1,0 +1,39 @@
+.button {
+	display: inline-block;
+	height: 48px;
+	padding: 0 32px;
+	border-radius: 24px;
+	background: linear-gradient(158deg, #008FCC, #870A9B);
+	display: flex;
+	align-items: center;
+	color: white;
+	font-weight: bold;
+	transition-duration: 200ms;
+	white-space: nowrap;
+}
+
+.button.secondary {
+	background: transparent;
+	border-color: #008FCC;
+	border-width: 2px;
+	border-style: solid;
+}
+
+.button.light {
+	background: white;
+	color: #008FCC;
+}
+
+.button.light.secondary  {
+	background: transparent;
+	border-color: white;
+	color: white;
+}
+
+.button:hover, .button.light:hover, .button.button.secondary:hover, .button.light.secondary:hover {
+	background: #ff004d;
+	color: white;
+	border-style: none;
+	transition-duration: 200ms;
+	transform: rotate(3deg);
+}

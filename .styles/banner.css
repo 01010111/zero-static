@@ -1,0 +1,45 @@
+.banner {
+    margin: 128px auto;
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(107.96deg, #008FCC 0%, #300A9B 75.53%, #870A9B 100.01%);
+    padding: 32px;
+    align-items: center;
+    justify-content: space-between;
+	color: white;
+    animation-name: banner-anim;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+.banner * {
+	margin: 0 32px;
+}
+
+@media screen and (max-width: 900px) {
+    .banner {
+        width: calc(100vw - 64px);
+        flex-direction: column;
+    }
+
+    .banner * {
+        margin: 16px 0;
+    }
+}
+
+@keyframes banner-anim {
+	from, to {
+		transform: perspective(400px) rotateY(3deg) rotateZ(1deg);
+        animation-timing-function: ease-out;
+	}
+    
+	25%, 75% {
+        transform: perspective(400px) rotateY(0deg);
+        animation-timing-function: linear;
+	}
+    
+    50% {
+        transform: perspective(400px) rotateY(-3deg) rotateZ(-1deg);
+        animation-timing-function: linear;
+	}
+}
