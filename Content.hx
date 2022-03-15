@@ -26,6 +26,47 @@ var index_content_md = '# Hello World
 
 This is my new website!';
 
+var first_post_md = 'Title: My First Post
+Author: 01010111
+Date: 3-9-2022
+Tags: first, miscellaneous
+---
+Hello World! This is my first blog post!
+';
+
+var post_template_html = '<!DOCTYPE html>
+<html lang="en">
+<head>
+	%% component header.html
+</head>
+<body>
+	<h1>
+    %% post title
+  </h1>
+  <h3>
+    %% post date
+    %% post author
+  </h3>
+    %% post body
+</body>
+</html>';
+
+var post_list_template = '
+<a href="
+  %% post url
+">
+  <div>
+    <h1>
+      %% post title
+    </h1>
+    <h3>
+      %% post date
+      %% post author
+    </h3>
+  </div>
+</a>
+';
+
 var deploy_yml = "name: Build and Deploy
 on: [push]
 jobs:

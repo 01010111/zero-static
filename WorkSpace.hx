@@ -9,6 +9,9 @@ var workspace_dirs = [
 	#if markdown
 	'.text',
 	#end
+	#if BLOG
+	'.posts',
+	#end
 ];
 
 function init() {
@@ -57,6 +60,26 @@ function init() {
 		trace('initializing markdown `.text/index-content.md`');
 		File.saveContent('.text/index-content.md', Content.index_content_md);
 	}
+	#end
+
+	#if BLOG
+	// Create first-post.md if it doesn't exist
+	if (!FileSystem.exists('.posts/first-post.md')) {
+		trace('initializing post `.posts/first-post.md`');
+		File.saveContent('.posts/first-post.md', Content.first_post_md);
+	}
+
+	// Create post-template.html if it doesn't exist
+	if (!FileSystem.exists('.components/post-template.html')) {
+		trace('initializing post template `.components/post-template.html`');
+		File.saveContent('.components/post-template.html', Content.post_template_html);
+	}
+
+	// Create header.html component if it doesn't exist
+	if (!FileSystem.exists('.components/post-list-template.html')) {
+		trace('initializing component `.components/post-list-template.html`');
+		File.saveContent('.components/post-list-template.html', Content.post_list_template);
+	}	
 	#end
 
 }
