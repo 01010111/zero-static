@@ -210,6 +210,12 @@
 	font-weight: bold;
 }
 
+@media print {
+	.footer {
+		display: none;
+	}
+}
+
 /* global.css */
 
 * {
@@ -366,6 +372,12 @@ pre {
 	-webkit-mask-image: url(images/hero-mask.png);
 	-webkit-mask-size: 100% 100%;
 	overflow: hidden;
+}
+
+@media print {
+	.nav {
+		display: none;
+	}
 }
 
 /* tutorial.css */

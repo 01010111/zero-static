@@ -2,6 +2,8 @@ import BlogUtils.Post;
 using StringTools;
 using Reflect;
 using Tools;
+using sys.io.File;
+using sys.FileSystem;
 
 function parse_content(content:String, tabs:Int = 0, ?post_src:String) {
 	var lines = content.split('\n');
@@ -10,8 +12,10 @@ function parse_content(content:String, tabs:Int = 0, ?post_src:String) {
 		var tab_len = 0;
 		while (line.charAt(tab_len) == '\t') tab_len++;
 		var command = get_command_data(line.replace('%%', '').trim());
+		trace(command.type);
 		var text = switch command.type {
 			case 'component', 'c': parse_content(get_component(command.data), 0, post_src);
+			case 'css': get_css();
 			#if markdown 
 			case 'markdown', 'md': get_markdown(command.data);
 			#end
@@ -29,7 +33,7 @@ function parse_content(content:String, tabs:Int = 0, ?post_src:String) {
 function get_command_data(s:String) {
 	var parsed = s.split(' ');
 	return {
-		type: parsed.length > 1 ? parsed[0] : 'component',
+		type: parsed.length > 1 ? parsed[0] : parsed[0] == 'css' ? 'css' : 'component',
 		data: parsed.length > 1 ? parsed.slice(1).join(' ') : parsed[0],
 	};
 }
@@ -42,13 +46,52 @@ function get_component(component:String) {
 	return Data.components[component];
 }
 
+function get_css() {
+	var stylesheet = '<style>\n';
+	for (file in '.styles'.readDirectory()) {
+		var content = '/* $file */\n\n';
+		content += '.styles/$file'.getContent();
+		content += '\n\n';
+		stylesheet += content;
+	}
+	stylesheet += '\n</style>';
+	return stylesheet;
+}
+
 #if markdown
+function markdown(str) {
+	return parse_markdown_headers(Markdown.markdownToHtml(str));
+}
+
 function get_markdown(component:String) {
 	if (!Data.markdown.exists(component)) {
 		trace('Markdown does not exist: $component');
 		return '<!-- missing text "$component" -->';
 	}
-	return Markdown.markdownToHtml(Data.markdown[component]);
+	return markdown(Data.markdown[component]);
+}
+
+function parse_markdown_headers(string:String) {
+	var lines = string.split('\n');
+	for (i in 0...lines.length) if (lines[i].indexOf('<h') >= 0) {
+		var line = lines[i];
+		var beg = line.indexOf('>');
+		var end = line.indexOf('</');
+		var header = line.substr(beg + 1, end - 4);
+		var header_words = header.split(' ');
+		for (i in 0...header_words.length) header_words[i] = remove_all_nonalphanumeric_chars(header_words[i].toLowerCase());
+		var header_id = header_words.join('-').replace('--', '-');
+		line = line.replace('<h1>', '<h1 id="$header_id">');
+		line = line.replace('<h2>', '<h2 id="$header_id">');
+		lines[i] = line;
+	}
+	return lines.join('\n');
+}
+
+function remove_all_nonalphanumeric_chars(str:String) {
+	var chars = str.split('');
+	for (char in chars) if ('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'.indexOf(char) == -1) chars.remove(char);
+	return chars.join('');
 }
 #end
 
@@ -69,8 +112,8 @@ function handle_post_command(str:String, ?src:String) {
 		case 'list': return get_post_list();
 		case 'url': return Data.posts[src].url;
 		#if markdown
-		case 'content': return Markdown.markdownToHtml(Data.posts[src].content);
-		case 'summary': return Markdown.markdownToHtml(Data.posts[src].summary);
+		case 'content': return markdown(Data.posts[src].content);
+		case 'summary': return markdown(Data.posts[src].summary);
 		#else
 		case 'content': return Data.posts[src].content;
 		case 'summary': return Data.posts[src].summary;

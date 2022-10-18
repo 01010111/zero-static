@@ -13,7 +13,9 @@ function run() {
 	generate_stylesheet();
 	set_pages();
 	set_components();
+	#if markdown
 	set_markdown();
+	#end
 	#if BLOG
 	set_posts();
 	generate_posts();
