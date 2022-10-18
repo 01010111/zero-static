@@ -14,12 +14,12 @@
 	</div>
 	<div class="tutorial">
 		<section>
-			<h1>Getting Started</h1>
+			<h1 id="getting-started">Getting Started</h1>
 			<p>Expand one of the sections below to learn more about using zero-static</p>
 		</section>
 		<h1 class="accordion">Setup</h1>
 		<article class="panel">
-			<h2>Setting up Haxe and Dependencies</h2>
+			<h2 id="setting-up-haxe-and-dependencies">Setting up Haxe and Dependencies</h2>
 			<p>Before starting on your website, you need a few things. First, you'll need to download Haxe - an open source programming language and compiler. This is what zero-static uses to build your websites.</p>
 			<p><a href="https://haxe.org/">Download Haxe here</a></p>
 			<p>After downloading and installing haxe, you'll need to install two haxe libraries, first we'll install <code>markdown</code>, which will enable zero-static to parse markdown files into html - open a terminal/console window and type:</p>
@@ -28,7 +28,7 @@
 			<pre><code>haxelib git zero-static https://github.com/01010111/zero-static</code></pre>
 			<p>You'll probably want an IDE or code editor as well - I recommend <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
 			<p>If you do use Visual Studio Code, be sure to install the Haxe extension!</p>
-			<h2>Spinning up a project</h2>
+			<h2 id="spinning-up-a-project">Spinning up a project</h2>
 			<p>Now that you have your development environment set up and ready, we can spin up a new project! Create a folder for your project, and create a file called <code>build.hxml</code>. An HXML file can store haxe compiler arguments so that it's easier to build. Inside <code>build.hxml</code> write the following:</p>
 <pre><code>-lib zero-static
  -lib markdown</code></pre>
@@ -49,12 +49,12 @@
 			- - 📄 index.html<br />
 			- - 📄 style.css<br />
 			- 📄 build.hxml  </p>
-			<h2>Troubleshooting</h2>
+			<h2 id="troubleshooting">Troubleshooting</h2>
 			<p>Did something wrong happen? Try the following:</p><ul><li>Make sure haxe was installed by opening a terminal/console and typing <code>haxe --version</code></li><li>Make sure the libraries were installed by opening a terminal/console and typing <code>haxelib list</code></li><li>Make sure you ran <code>haxe build.hxml</code> from the correct directory</li><li>Make sure you have write permissions for your project's directory</li></ul>
 		</article>
 		<h1 class="accordion">Usage</h1>
 		<article class="panel">
-			<h2>Learning the project skeleton</h2>
+			<h2 id="learning-the-project-skeleton">Learning the project skeleton</h2>
 			<p>To use zero-static efficiently, it's a good idea to familiarize yourself with the workspace. Let's go over each of the folders and talk about the contents of each and how they relate to the project as a whole.</p>
 			<h3>.pages</h3>
 			<p>The <code>.pages</code> folder is the home to the pages of your site. They are html, and when the site is built, they are parsed and passed along to the <code>dist</code> folder. When authoring pages, you can add components and reference markdown documents to make page building easier. Let's take a look at the <code>index.html</code> page that gets generated on a new zero-static instance:</p>
@@ -92,7 +92,7 @@
 			<p>The <code>.static</code> folder is where you can store any files that don't get changed - they'll be moved directly into the <code>dist</code> folder when you build your site. Add whatever you need here - images, a favicon, other scripts, etc! It's a catch-all for <em>everything else</em>.</p>
 			<h3>dist</h3>
 			<p>The <code>dist</code> folder is where your site gets built to! Dist is short for "distributable" - which means if you're uploading your site somewhere, you'd want to upload the contents of this folder.</p>
-			<h2>Advanced Usage</h2>
+			<h2 id="advanced-usage">Advanced Usage</h2>
 			<p>Here are a few tips for advanced usage!</p>
 			<p>If you don't want to author your content in markdown, you can simply remove the <code>-lib markdown</code> from your <code>build.hxml</code> file.</p>
 			<p>If you'd like a handy github action to push the <code>dist</code> folder to a <code>gh-pages</code> branch for super easy static webpage hosting, add the following to your <code>build.hxml</code>:</p>

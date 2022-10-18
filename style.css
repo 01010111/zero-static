@@ -1,75 +1,114 @@
-/* features.css */
+/* tutorial.css */
 
-.features {
+.tutorial {
+	max-width: calc(100vw - 64px);
 	width: 800px;
-	max-width: calc(100vw - 32px);
 	margin: 128px auto;
 }
 
-.features section {
-	margin: 128px 16px;
+.tutorial section {
+	margin: 64px;
 }
 
-.features section h1 {
-	text-align: center;
-	margin-bottom: 32px;
+.tutorial section * {
+	margin: 32px 0;
 }
 
-/* footer.css */
 
-.footer {
-    height: 600px;
-    background-image: linear-gradient(107.96deg, #008FCC 0%, #300A9B 75.53%, #870A9B 100.01%);
-	mask-image: url(images/footer-mask.png);
-	mask-size: 100% 100%;
-	-webkit-mask-image: url(images/footer-mask.png);
-	-webkit-mask-size: 100% 100%;
-	image-rendering: -webkit-optimize-contrast;
+/* accordion.css */
+
+.accordion {
+	background-color: white;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	text-align: left;
+	border: none;
+	outline: none;
+	transition: 300ms;
+}
+  
+.accordion.active, .accordion:hover {
+	background-color: #fed;
+}
+  
+.panel {
+	max-height: 0;
+	overflow: hidden;
+	transition: 200ms;
+	margin: 0 32px;
 }
 
-.footer .links {
-	position: relative;
-	left: 64px;
-	top: 244px;
-	width: 50%;
+.panel * {
+	margin: 16px 0;
 }
 
-.footer .links ul {
-	list-style: none;
+.panel.active {
+	margin: 32px;
 }
 
-.footer .links ul li {
+.accordion:after {
+	content: '\002B';
+	font-size: 32px;
+	float: left;
+	margin: 0 16px;
+}
+  
+.accordion.active:after {
+	content: "\002D";
+	margin: -2px 16px;
+}
+
+.panel h1, .panel h2, .panel h3 {
+	margin-top: 32px;
+}
+
+/* banner.css */
+
+.banner {
+    margin: 128px auto;
+    width: 800px;
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(107.96deg, #008FCC 0%, #300A9B 75.53%, #870A9B 100.01%);
+    padding: 32px;
+    align-items: center;
+    justify-content: space-between;
 	color: white;
-	font-size: 24px;
-	font-weight: bold;
+    animation-name: banner-anim;
+    animation-duration: 5s;
+    animation-iteration-count: infinite;
+}
+.banner * {
+	margin: 0 32px;
 }
 
-.footer .links ul li a {
-	color: white;
-	transition-duration: 200ms;
+@media screen and (max-width: 900px) {
+    .banner {
+        width: calc(100vw - 64px);
+        flex-direction: column;
+    }
+
+    .banner * {
+        margin: 16px 0;
+    }
 }
 
-.footer .links ul li a:hover {
-	display: inline-block;
-	padding: 0 24px;
-	transition-duration: 200ms;
-}
-
-.footer .made-with {
-	display: flex;
-	align-items: center;
-	position: relative;
-	margin: 0 64px;
-	height: 64px;
-	top: 420px;
-	color: white;
-	float: right;
-	padding: 0 80px;
-	background-image: url(images/logo-light.svg);
-	background-size: 60px;
-	background-repeat: no-repeat;
-	background-position: 100% 0;
-	font-weight: bold;
+@keyframes banner-anim {
+	from, to {
+		transform: perspective(400px) rotateY(3deg) rotateZ(1deg);
+        animation-timing-function: ease-out;
+	}
+    
+	25%, 75% {
+        transform: perspective(400px) rotateY(0deg);
+        animation-timing-function: linear;
+	}
+    
+    50% {
+        transform: perspective(400px) rotateY(-3deg) rotateZ(-1deg);
+        animation-timing-function: linear;
+	}
 }
 
 /* hero.css */
@@ -166,52 +205,55 @@
 	}
 }
 
-/* banner.css */
+/* global.css */
 
-.banner {
-    margin: 128px auto;
-    width: 800px;
-    display: flex;
-    flex-direction: row;
-    background: linear-gradient(107.96deg, #008FCC 0%, #300A9B 75.53%, #870A9B 100.01%);
-    padding: 32px;
-    align-items: center;
-    justify-content: space-between;
-	color: white;
-    animation-name: banner-anim;
-    animation-duration: 5s;
-    animation-iteration-count: infinite;
-}
-.banner * {
-	margin: 0 32px;
+* {
+	margin: 0;
+	padding: 0;
+	-moz-box-sizing: border-box; 
+	-webkit-box-sizing: border-box; 
+	box-sizing: border-box;
+	font-family: 'Inconsolata', monospace;
 }
 
-@media screen and (max-width: 900px) {
-    .banner {
-        width: calc(100vw - 64px);
-        flex-direction: column;
-    }
-
-    .banner * {
-        margin: 16px 0;
-    }
+a {
+	text-decoration: none;
+	color: #008FCC;
 }
 
-@keyframes banner-anim {
-	from, to {
-		transform: perspective(400px) rotateY(3deg) rotateZ(1deg);
-        animation-timing-function: ease-out;
-	}
-    
-	25%, 75% {
-        transform: perspective(400px) rotateY(0deg);
-        animation-timing-function: linear;
-	}
-    
-    50% {
-        transform: perspective(400px) rotateY(-3deg) rotateZ(-1deg);
-        animation-timing-function: linear;
-	}
+a:hover {
+	color: #ff004d;
+}
+
+code {
+	background: #ffb;
+	color: black;
+	font-size: 12px;
+	padding: 2px 8px;
+	border-radius: 4px;
+	font-weight: bold;
+}
+
+pre {
+	background: #ffb;
+	padding: 16px;
+}
+
+/* features.css */
+
+.features {
+	width: 800px;
+	max-width: calc(100vw - 32px);
+	margin: 128px auto;
+}
+
+.features section {
+	margin: 128px 16px;
+}
+
+.features section h1 {
+	text-align: center;
+	margin-bottom: 32px;
 }
 
 /* button.css */
@@ -256,40 +298,6 @@
 	transform: rotate(3deg);
 }
 
-/* global.css */
-
-* {
-	margin: 0;
-	padding: 0;
-	-moz-box-sizing: border-box; 
-	-webkit-box-sizing: border-box; 
-	box-sizing: border-box;
-	font-family: 'Inconsolata', monospace;
-}
-
-a {
-	text-decoration: none;
-	color: #008FCC;
-}
-
-a:hover {
-	color: #ff004d;
-}
-
-code {
-	background: #ffb;
-	color: black;
-	font-size: 12px;
-	padding: 2px 8px;
-	border-radius: 4px;
-	font-weight: bold;
-}
-
-pre {
-	background: #ffb;
-	padding: 16px;
-}
-
 /* nav.css */
 
 .nav {
@@ -320,68 +328,72 @@ pre {
 	overflow: hidden;
 }
 
-/* tutorial.css */
-
-.tutorial {
-	max-width: calc(100vw - 64px);
-	width: 800px;
-	margin: 128px auto;
+@media print {
+	.nav {
+		display: none;
+	}
 }
 
-.tutorial section {
-	margin: 64px;
+/* footer.css */
+
+.footer {
+    height: 600px;
+    background-image: linear-gradient(107.96deg, #008FCC 0%, #300A9B 75.53%, #870A9B 100.01%);
+	mask-image: url(images/footer-mask.png);
+	mask-size: 100% 100%;
+	-webkit-mask-image: url(images/footer-mask.png);
+	-webkit-mask-size: 100% 100%;
+	image-rendering: -webkit-optimize-contrast;
 }
 
-.tutorial section * {
-	margin: 32px 0;
+.footer .links {
+	position: relative;
+	left: 64px;
+	top: 244px;
+	width: 50%;
 }
 
-
-/* accordion.css */
-
-.accordion {
-	background-color: white;
-	cursor: pointer;
-	padding: 18px;
-	width: 100%;
-	text-align: left;
-	border: none;
-	outline: none;
-	transition: 300ms;
-}
-  
-.accordion.active, .accordion:hover {
-	background-color: #fed;
-}
-  
-.panel {
-	max-height: 0;
-	overflow: hidden;
-	transition: 200ms;
-	margin: 0 32px;
+.footer .links ul {
+	list-style: none;
 }
 
-.panel * {
-	margin: 16px 0;
+.footer .links ul li {
+	color: white;
+	font-size: 24px;
+	font-weight: bold;
 }
 
-.panel.active {
-	margin: 32px;
+.footer .links ul li a {
+	color: white;
+	transition-duration: 200ms;
 }
 
-.accordion:after {
-	content: '\002B';
-	font-size: 32px;
-	float: left;
-	margin: 0 16px;
-}
-  
-.accordion.active:after {
-	content: "\002D";
-	margin: -2px 16px;
+.footer .links ul li a:hover {
+	display: inline-block;
+	padding: 0 24px;
+	transition-duration: 200ms;
 }
 
-.panel h1, .panel h2, .panel h3 {
-	margin-top: 32px;
+.footer .made-with {
+	display: flex;
+	align-items: center;
+	position: relative;
+	margin: 0 64px;
+	height: 64px;
+	top: 420px;
+	color: white;
+	float: right;
+	padding: 0 80px;
+	background-image: url(images/logo-light.svg);
+	background-size: 60px;
+	background-repeat: no-repeat;
+	background-position: 100% 0;
+	font-weight: bold;
+}
+
+@media print {
+	.footer {
+		display: none;
+	}
 }
 
