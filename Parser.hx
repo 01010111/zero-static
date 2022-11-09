@@ -12,7 +12,6 @@ function parse_content(content:String, tabs:Int = 0, ?post_src:String) {
 		var tab_len = 0;
 		while (line.charAt(tab_len) == '\t') tab_len++;
 		var command = get_command_data(line.replace('%%', '').trim());
-		trace(command.type);
 		var text = switch command.type {
 			case 'component', 'c': parse_content(get_component(command.data), 0, post_src);
 			case 'css': get_css();
