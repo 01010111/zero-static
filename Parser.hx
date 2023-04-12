@@ -1,32 +1,31 @@
 import BlogUtils.Post;
 using StringTools;
 using Reflect;
+using Lambda;
 using Tools;
 using sys.io.File;
 using sys.FileSystem;
 
 function parse_content(content:String, tabs:Int = 0, ?post_src:String) {
-	var lines = content.split('\n');
-	for (i in 0...lines.length) if (lines[i].contains('%%')) {
-		var line = lines[i];
-		var tab_len = 0;
-		while (line.charAt(tab_len) == '\t') tab_len++;
-		var command = get_command_data(line.replace('%%', '').trim());
-		var text = switch command.type {
-			case 'component', 'c': parse_content(get_component(command.data), 0, post_src);
-			case 'css': get_css();
-			#if markdown 
-			case 'markdown', 'md': get_markdown(command.data);
-			#end
-			#if BLOG
-			case 'post', 'p': handle_post_command(command.data, post_src);
-			#end
-			default: unknown_command(command.data, command.type);
-		}
-		text = apply_tabs(text,tab_len);
-		lines[i] = text;
+	var i = 0;
+	var parse_content = (c:String) -> {
+		var pre = c.split('{%')[0];
+		var post = c.split('%}').shift_arr_return().join('%}');
+		var	parse = parse(c.split('{%')[1].split('%}')[0].trim());
+		return pre + parse + post;
 	}
-	return lines.join('\n');
+	for (i in 0...content.split('{%').length - 1) content = parse_content(content);
+	trace(content);
+	return content;
+}
+
+function parse(s:String):String {
+	var c = s.split(' ')[0];
+	var data =
+	switch c {
+		case 'c', 'component': parse_component(s);
+	}
+	return '';
 }
 
 function get_command_data(s:String) {
